@@ -31,8 +31,8 @@ bool CameraHandler::present(const QVideoFrame& frame)
 
 QList<QVideoFrame::PixelFormat> CameraHandler::supportedPixelFormats(QAbstractVideoBuffer::HandleType) const
 {
-	return {QVideoFrame::Format_YUV420P, QVideoFrame::Format_NV12, QVideoFrame::Format_YUYV, QVideoFrame::Format_RGB32,
-	        QVideoFrame::Format_ARGB32};
+	return {QVideoFrame::Format_YUV420P, QVideoFrame::Format_NV12,   QVideoFrame::Format_YUYV,
+	        QVideoFrame::Format_RGB32,   QVideoFrame::Format_ARGB32, QVideoFrame::Format_ABGR32};
 }
 
 void CameraHandler::onCameraStateChanged(const QCamera::State state)

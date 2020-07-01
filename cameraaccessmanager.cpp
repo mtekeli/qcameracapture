@@ -4,17 +4,20 @@
 
 #include <QCameraInfo>
 
-CameraAccessManager::CameraAccessManager(QObject *parent) : QObject{parent} {
-  qRegisterMetaType<VideoCapture *>("VideoCapture*");
+CameraAccessManager::CameraAccessManager(QObject* parent) : QObject{parent}
+{
+	qRegisterMetaType<VideoCapture*>("VideoCapture*");
 
-  const auto cameras = QCameraInfo::availableCameras();
+	const auto cameras = QCameraInfo::availableCameras();
 
-  if (!cameras.isEmpty()) {
-    const auto cameraInfo = cameras.at(0);
-    const auto camera = new CameraHandler{cameraInfo, this};
-    _videoCapture = new VideoCapture{this};
+	if (!cameras.isEmpty())
+	{
+		const auto cameraInfo    = cameras.at(0);
+		const auto cameraHandler = new CameraHandler{cameraInfo, this};
 
-    connect(camera, &CameraHandler::frameReceived, _videoCapture,
-            &VideoCapture::onFrameReceived);
-  }
+		_videoCapture = new VideoCapture{this};
+
+		connect(cameraHandler, &CameraHandler::frameReceived, _videoCapture, &VideoCapture::onFrameReceived);
+		connect(cameraHandler, &CameraHandler::surfaceFormatChanged, _videoCapture, &VideoCapture::setSurfaceFormat);
+	}
 }
