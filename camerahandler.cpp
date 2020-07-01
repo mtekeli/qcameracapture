@@ -15,6 +15,7 @@ CameraHandler::CameraHandler(const QCameraInfo& cameraInfo, QObject* parent)
 	connect(_camera, &QCamera::statusChanged, this, &CameraHandler::onCameraStatusChanged);
 
 	_camera->load();
+	_camera->start();
 }
 
 CameraHandler::~CameraHandler() { qDebug() << "releasing camera handler"; }
@@ -69,6 +70,4 @@ void CameraHandler::onCameraStatusChanged(const QCamera::Status status)
 
 	if (!isSettingSet)
 		qWarning() << "unable to set the camera setting, will be using default";
-
-	_camera->start();
 }
