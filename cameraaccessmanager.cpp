@@ -18,6 +18,7 @@ CameraAccessManager::CameraAccessManager(QObject* parent) : QObject{parent}
 		_videoCapture = new VideoCapture{this};
 
 		connect(cameraHandler, &CameraHandler::frameReceived, _videoCapture, &VideoCapture::onFrameReceived);
+		connect(cameraHandler, &CameraHandler::frameReceived, this, &CameraAccessManager::onNewFrame);
 		connect(cameraHandler, &CameraHandler::surfaceFormatChanged, _videoCapture, &VideoCapture::setSurfaceFormat);
 	}
 }

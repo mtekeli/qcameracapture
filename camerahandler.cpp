@@ -24,7 +24,9 @@ bool CameraHandler::present(const QVideoFrame& frame)
 {
 	qDebug() << "frame received size:" << frame.size() << " format:" << frame.pixelFormat();
 
-	emit frameReceived(frame, {});
+	auto copy = frame;
+
+	emit frameReceived(copy, {});
 
 	return true;
 }

@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         cameraaccessmanager.cpp \
         camerahandler.cpp \
+        frameprocessor.cpp \
         main.cpp \
         videocapture.cpp
 
@@ -34,4 +35,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     cameraaccessmanager.h \
     camerahandler.h \
+    frameprocessor.h \
     videocapture.h
